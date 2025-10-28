@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DMP Consulting Services — Seguros, Impuestos y Servicios Financieros</title>
+  <meta name="description" content="Asesoría en seguros, preparación de impuestos y servicios financieros. Atención en español e inglés." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f172a;       /* slate-900 */
+      --card:#111827;     /* gray-900 */
+      --muted:#94a3b8;    /* slate-400 */
+      --primary:#06b6d4;  /* cyan-500 */
+      --accent:#a78bfa;   /* violet-400 */
+      --ring:#22d3ee;     /* cyan-400 */
+      --ok:#10b981;       /* emerald-500 */
+      --warn:#f59e0b;     /* amber-500 */
+      --err:#ef4444;      /* red-500 */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b1224,#0f172a 30%,#0b1224);color:#e5e7eb;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{color:var(--primary);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{position:sticky;top:0;background:rgba(17,24,39,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;font-weight:800}
+    .brand-name{font-weight:800;letter-spacing:.2px}
+    .menu{display:flex;gap:16px;flex-wrap:wrap}
+    .menu a{padding:10px 12px;border-radius:10px;color:#cbd5e1}
+    .menu a:hover{background:rgba(255,255,255,.06);color:#fff}
+    .lang{display:flex;gap:8px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:#fff}
+    .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 10px 30px rgba(6,182,212,.25)}
+    .btn:hover{transform:translateY(-1px)}
+    .hero{padding:80px 24px 40px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px}
+    .badge{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:#a5b4fc;background:rgba(167,139,250,.15);padding:8px 10px;border-radius:999px;border:1px solid rgba(167,139,250,.25)}
+    h1{font-size:clamp(28px,6vw,48px);line-height:1.1;margin:12px 0 8px;font-weight:800}
+    .lead{color:#cbd5e1;font-size:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px}
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .section{padding:40px 24px}
+    .section h2{font-size:28px;margin:0 0 12px;font-weight:800}
+    .muted{color:var(--muted)}
+    .feature{display:flex;gap:12px}
+    .icon{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--primary),transparent);display:grid;place-items:center}
+    .list{display:grid;gap:10px}
+    .list li{display:flex;gap:10px}
+    .tag{font-size:12px;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:#cbd5e1}
+    .footer{padding:32px 24px;border-top:1px solid rgba(255,255,255,.06);color:#94a3b8}
+    .input, textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(2,6,23,.6);color:#fff}
+    .input:focus, textarea:focus{outline:2px solid var(--ring);border-color:transparent}
+    form{display:grid;gap:12px}
+    @media(max-width:880px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:640px){
+      .grid.cols-3{grid-template-columns:1fr}
+    }
+  </style>
+  <script>
+    // Simple bilingual toggle (ES / EN)
+    const i18n = {
+      es: {
+        nav_services: "Servicios",
+        nav_about: "Nosotros",
+        nav_faq: "Preguntas",
+        nav_reviews: "Opiniones",
+        nav_contact: "Contacto",
+        badge: "Atención en todo EE. UU.",
+        h1: "Seguros e Impuestos con atención cercana y profesional",
+        lead: "Cotiza tu seguro, prepara tus taxes y resuelve tus trámites con un solo equipo. Rápido, claro y 100% en español.",
+        cta_quote: "Cotizar ahora",
+        cta_call: "Llamar",
+        services_title: "Servicios",
+        s1: "Seguros de Auto, Hogar, Vida y Salud (ACA/Medicare)",
+        s2: "Preparación de Impuestos (Personal y Corporativo)",
+        s3: "Crédito y Finanzas (educación y guía)",
+        s4: "Documentos de Inmigración (formularios y apoyo)",
+        about_title: "¿Por qué elegirnos?",
+        about_1_t: "Acompañamiento real",
+        about_1_d: "Explicamos cada paso y te mantenemos al tanto.",
+        about_2_t: "Mejores opciones",
+        about_2_d: "Cotizamos en varias compañías para ahorrar y cubrir lo importante.",
+        about_3_t: "Cumplimiento y ética",
+        about_3_d: "Trabajamos con estándares profesionales y transparencia.",
+        reviews_title: "Opiniones",
+        r1: "Proceso sencillo y rápido. Me ayudaron con el seguro y mis taxes el mismo día.",
+        r2: "Muy pacientes, resolvieron todas mis dudas y pagué menos de lo que esperaba.",
+        faq_title: "Preguntas frecuentes",
+        q1: "¿Pueden atenderme por WhatsApp o videollamada?",
+        a1: "Sí, atendemos clientes en todo EE. UU. de forma remota.",
+        q2: "¿Hacen envíos de documentos?",
+        a2: "Sí, enviamos copias y archivos digitales de manera segura.",
+        q3: "¿Puedo pagar en línea?",
+        a3: "Aceptamos tarjetas y pagos electrónicos.",
+        contact_title: "Contacto",
+        form_name: "Nombre",
+        form_phone: "Teléfono",
+        form_email: "Correo",
+        form_msg: "¿Cómo podemos ayudarte?",
+        form_send: "Enviar",
+        footer: "© "
+      },
+      en: {
+        nav_services: "Services",
+        nav_about: "About",
+        nav_faq: "FAQ",
+        nav_reviews: "Reviews",
+        nav_contact: "Contact",
+        badge: "Serving all the U.S.",
+        h1: "Insurance & Taxes with friendly, professional care",
+        lead: "Get insurance quotes, file your taxes, and handle paperwork with one trusted team. Fast, clear, and bilingual.",
+        cta_quote: "Get a Quote",
+        cta_call: "Call",
+        services_title: "Services",
+        s1: "Auto, Home, Life & Health (ACA/Medicare)",
+        s2: "Tax Preparation (Personal & Business)",
+        s3: "Credit & Finances (education and guidance)",
+        s4: "Immigration Paperwork (forms & support)",
+        about_title: "Why choose us?",
+        about_1_t: "Real guidance",
+        about_1_d: "We explain every step and keep you updated.",
+        about_2_t: "Better options",
+        about_2_d: "We compare carriers to save money and protect what matters.",
+        about_3_t: "Compliance & ethics",
+        about_3_d: "Professional standards and transparent service.",
+        reviews_title: "Reviews",
+        r1: "Simple, fast process. They handled my insurance and taxes the same day.",
+        r2: "Very patient—answered all my questions and I paid less than expected.",
+        faq_title: "FAQ",
+        q1: "Can we meet via WhatsApp or video?",
+        a1: "Yes, we serve clients nationwide remotely.",
+        q2: "Do you ship documents?",
+        a2: "Yes, we send physical copies and secure digital files.",
+        q3: "Can I pay online?",
+        a3: "We accept cards and electronic payments.",
+        contact_title: "Contact",
+        form_name: "Name",
+        form_phone: "Phone",
+        form_email: "Email",
+        form_msg: "How can we help?",
+        form_send: "Send",
+        footer: "© "
+      }
+    };
+    function setLang(lang){
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const k = el.getAttribute('data-i18n');
+        if(i18n[lang][k]) el.textContent = i18n[lang][k];
+      });
+      document.documentElement.lang = lang;
+      localStorage.setItem('lang', lang);
+    }
+    document.addEventListener('DOMContentLoaded',()=>{
+      const lang = localStorage.getItem('lang')||'es';
+      setLang(lang);
+      document.getElementById('lang-es').addEventListener('click',()=>setLang('es'));
+      document.getElementById('lang-en').addEventListener('click',()=>setLang('en'));
+      // Simple form handler (replace MAILTO/HREF targets below)
+      const form = document.getElementById('contact-form');
+      form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        const body = encodeURIComponent(`${data.name}\n${data.phone}\n${data.email}\n\n${data.message}`);
+        // Tip: Cambia el correo de destino aquí
+        window.location.href = `mailto:mayliparra@dmpconsultingservices.net?subject=Contacto%20desde%20la%20web&body=${body}`;
+      });
+    });
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "name":"DMP Consulting Services",
+    "image":"logo-dmp.jpg",
+    "telephone":"713-534-5110",
+    "email":"mayliparra@dmpconsultingservices.net",
+    "address":{"@type":"PostalAddress","streetAddress":"11555 Gaston Rd, Blgd C","addressLocality":"Katy","addressRegion":"TX","postalCode":"77494","addressCountry":"US"},
+    "areaServed":"US",
+    "url":"{{DOMINIO}}",
+    "sameAs":["{{RED_SOCIAL_1}}","{{RED_SOCIAL_2}}"],
+    "priceRange":"$$",
+    "description":"Seguros e impuestos con atención en español e inglés."
+  }
+  </script>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">DMP</div>
+        <div class="brand-name">DMP Consulting Services</div>
+      </div>
+      <div class="menu">
+        <a href="#servicios" data-i18n="nav_services">Servicios</a>
+        <a href="#nosotros" data-i18n="nav_about">Nosotros</a>
+        <a href="#faq" data-i18n="nav_faq">Preguntas</a>
+        <a href="#opiniones" data-i18n="nav_reviews">Opiniones</a>
+        <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+      </div>
+      <div class="lang">
+        <button class="btn" id="lang-es">ES</button>
+        <button class="btn" id="lang-en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge"><span>★</span> <span data-i18n="badge">Atención en todo EE. UU.</span></div>
+        <h1 data-i18n="h1">Seguros e Impuestos con atención cercana y profesional</h1>
+        <p class="lead" data-i18n="lead">Cotiza tu seguro, prepara tus taxes y resuelve tus trámites con un solo equipo. Rápido, claro y 100% en español.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+          <!-- Tip: Reemplaza https://forms.gle/86TMiYY2MPmJMBXU9 con tu formulario (ej. Google Forms) -->
+          <a class="btn primary" href="https://forms.gle/86TMiYY2MPmJMBXU9" target="_blank" rel="noopener" data-i18n="cta_quote">Cotizar ahora</a>
+          <a class="btn" href="tel:713-534-5110" data-i18n="cta_call">Llamar</a>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <span class="tag">#Auto</span>
+          <span class="tag">#Salud</span>
+          <span class="tag">#Medicare</span>
+          <span class="tag">#Impuestos</span>
+          <span class="tag">#Inmigración</span>
+          <span class="tag">#Crédito</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="grid cols-2">
+          <div>
+            <div class="muted">Licencia / EFIN</div>
+            <div style="font-weight:700">{{CREDENCIALES}}</div>
+          </div>
+          <div>
+            <div class="muted">Horario</div>
+            <div style="font-weight:700">{{HORARIO}}</div>
+          </div>
+          <div>
+            <div class="muted">WhatsApp</div>
+            <div style="font-weight:700"><a href="https://wa.me/17135345110">+17135345110</a></div>
+          </div>
+          <div>
+            <div class="muted">Email</div>
+            <div style="font-weight:700"><a href="mailto:mayliparra@dmpconsultingservices.net">mayliparra@dmpconsultingservices.net</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <h2 data-i18n="services_title">Servicios</h2>
+      <div class="grid cols-3">
+        <div class="card feature">
+          <div class="icon">🚗</div>
+          <div>
+            <strong data-i18n="s1">Seguros de Auto, Hogar, Vida y Salud (ACA/Medicare)</strong>
+            <p class="muted">Cotizamos en múltiples compañías para conseguir cobertura y precio ideales.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🧾</div>
+          <div>
+            <strong data-i18n="s2">Preparación de Impuestos (Personal y Corporativo)</strong>
+            <p class="muted">W‑2, 1099, ITIN, corporativos. Presentación electrónica segura.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">💳</div>
+          <div>
+            <strong data-i18n="s3">Crédito y Finanzas (educación y guía)</strong>
+            <p class="muted">Revisión de reporte, hábitos financieros y metas.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🗂️</div>
+          <div>
+            <strong data-i18n="s4">Documentos de Inmigración (formularios y apoyo)</strong>
+            <p class="muted">Asistencia en formularios y organización de evidencia.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🛡️</div>
+          <div>
+            <strong>Compliance</strong>
+            <p class="muted">Trabajo ético, confidencial y conforme a ley.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">⚡</div>
+          <div>
+            <strong>Atención rápida</strong>
+            <p class="muted">Respuesta el mismo día en temporada alta y baja.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section class="section" id="nosotros">
+    <div class="container grid cols-3">
+      <div class="card">
+        <h3 data-i18n="about_1_t">Acompañamiento real</h3>
+        <p class="muted" data-i18n="about_1_d">Explicamos cada paso y te mantenemos al tanto.</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="about_2_t">Mejores opciones</h3>
+        <p class="muted" data-i18n="about_2_d">Cotizamos en varias compañías para ahorrar y cubrir lo importante.</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="about_3_t">Cumplimiento y ética</h3>
+        <p class="muted" data-i18n="about_3_d">Trabajamos con estándares profesionales y transparencia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINIONES -->
+  <section class="section" id="opiniones">
+    <div class="container">
+      <h2 data-i18n="reviews_title">Opiniones</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <p>★★★★★</p>
+          <p class="muted" data-i18n="r1">Proceso sencillo y rápido. Me ayudaron con el seguro y mis taxes el mismo día.</p>
+          <p><strong>— {{NOMBRE_TESTIMONIO_1}}</strong></p>
+        </div>
+        <div class="card">
+          <p>★★★★★</p>
+          <p class="muted" data-i18n="r2">Muy pacientes, resolvieron todas mis dudas y pagué menos de lo que esperaba.</p>
+          <p><strong>— {{NOMBRE_TESTIMONIO_2}}</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 data-i18n="faq_title">Preguntas frecuentes</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <strong data-i18n="q1">¿Pueden atenderme por WhatsApp o videollamada?</strong>
+          <p class="muted" data-i18n="a1">Sí, atendemos clientes en todo EE. UU. de forma remota.</p>
+        </div>
+        <div class="card">
+          <strong data-i18n="q2">¿Hacen envíos de documentos?</strong>
+          <p class="muted" data-i18n="a2">Sí, enviamos copias y archivos digitales de manera segura.</p>
+        </div>
+        <div class="card">
+          <strong data-i18n="q3">¿Puedo pagar en línea?</strong>
+          <p class="muted" data-i18n="a3">Aceptamos tarjetas y pagos electrónicos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <div class="container grid cols-2">
+      <div>
+        <h2 data-i18n="contact_title">Contacto</h2>
+        <p class="muted">Dirección: 11555 Gaston Rd, Blgd C — Katy, TX 77494</p>
+        <p class="muted">Tel: <a href="tel:713-534-5110">713-534-5110</a> · WhatsApp: <a href="https://wa.me/17135345110">+17135345110</a></p>
+        <p class="muted">Email: <a href="mailto:mayliparra@dmpconsultingservices.net">mayliparra@dmpconsultingservices.net</a></p>
+        <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="https://forms.gle/86TMiYY2MPmJMBXU9" target="_blank" rel="noopener">Formulario de cotización</a>
+          <a class="btn" href="https://maps.google.com/?q=11555 Gaston Rd, Blgd C Katy TX 77494" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="card">
+        <form id="contact-form">
+          <input class="input" name="name" placeholder="Nombre" aria-label="Nombre" required />
+          <input class="input" name="phone" placeholder="Teléfono" aria-label="Teléfono" />
+          <input class="input" type="email" name="email" placeholder="Correo" aria-label="Correo" />
+          <textarea class="input" name="message" rows="4" placeholder="¿Cómo podemos ayudarte?" aria-label="Mensaje"></textarea>
+          <button class="btn primary" type="submit" data-i18n="form_send">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" id="year"><span data-i18n="footer">© </span><script>document.currentScript.parentElement.appendChild(document.createTextNode(new Date().getFullYear()+' DMP Consulting Services'))</script> · <a href="#">Política de privacidad</a>
+    </div>
+  </footer>
+</body>
+</html>
